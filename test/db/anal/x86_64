@@ -10,7 +10,7 @@ EOF
 RUN
 
 NAME=anal.pushret bin
-FILE=bins/other/pushret.bin
+FILE=bins/drcov/pushret.bin
 ARGS=-n -m 0x1000 -a x86 -b 64
 CMDS=<<EOF
 e anal.pushret=true
