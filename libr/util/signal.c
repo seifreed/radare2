@@ -67,6 +67,16 @@ R_API const char* r_signal_tostring(int code) {
 	return NULL;
 }
 
+R_API void r_signal_foreach(RSignalCallback cb, void *user) {
+	R_RETURN_IF_FAIL (cb);
+	int i;
+	for (i = 0; signals[i].name; i++) {
+		if (!cb (user, signals[i].name, signals[i].code)) {
+			break;
+		}
+	}
+}
+
 #if R2__UNIX__
 R_API void r_signal_sigmask(int how, const sigset_t *newmask, sigset_t *oldmask) {
 #if HAVE_PTHREAD
@@ -118,4 +128,3 @@ R_API const char *r_signal_to_human(int signum) {
 	return "unhandled";
 #endif
 }
-
